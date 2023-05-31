@@ -17,6 +17,14 @@
 				    <p class="card-text">[[ *{descrizione} ]]</p>
 				    <p class="card-text">[[ *{prezzo} ]]</p>
 				  </div>
+				  <div class="card-body text-center">
+				    <h2 class="card-title">Offerte</h2>
+				    <div th:each="offerta : ${offerte_list}" th:object="${offerta}">
+					    <p class="card-text">[[ *{titolo} ]] - [[ *{sconto} ]]%</p>
+<!-- 					    <p class="card-text">[[ *{data_inizio} ]]</p> -->
+				    </div>
+				    <a class="btn btn-primary mt-3" th:href="@{/offerta/create}">Aggiungi nuova offerta</a>
+				  </div>
 				</div>
 			</div>
 		</div>

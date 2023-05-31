@@ -50,7 +50,11 @@ public class PizzaController {
 		Optional<Pizza> optPizza = pizzaService.findPizzaById(id);
 		Pizza pizza = optPizza.get();
 		
+		Optional<Pizza> optPizzaId = pizzaService.findByIdWithSpecialOffer(id);
+		Pizza special_offer_pizza = optPizzaId.get();
+		
 		model.addAttribute("pizza", pizza);
+		model.addAttribute("offerte_list", special_offer_pizza.getOffertaSpeciale());
 		
 		return "single-pizza";
 	}

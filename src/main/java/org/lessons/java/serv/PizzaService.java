@@ -3,10 +3,13 @@ package org.lessons.java.serv;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.Hibernate;
 import org.lessons.java.pojo.Pizza;
 import org.lessons.java.repo.PizzaRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class PizzaService {
@@ -33,5 +36,14 @@ public class PizzaService {
 	public void deletePizza(Pizza pizza) {
 		
 		pizzaRepo.delete(pizza);
+	}
+	
+	@Transactional
+	public Optional<Pizza> findByIdWithSpecialOffer(int id) {
+		
+		Optional<Pizza> pizzaOpt = pizzaRepo.findById(id);
+		Hibernate.initialize(pizzaOpt.get().getOffertaSpeciale());
+		
+		return pizzaOpt;
 	}
 }
