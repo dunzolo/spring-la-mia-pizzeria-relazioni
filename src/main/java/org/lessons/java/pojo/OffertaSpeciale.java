@@ -8,6 +8,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class OffertaSpeciale {
@@ -16,9 +19,13 @@ public class OffertaSpeciale {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-    private LocalDate data_inizio;
-	private LocalDate data_fine;
+	@FutureOrPresent(message = "La data non può essere nel passato")
+    private LocalDate dataInizio;
+	@FutureOrPresent(message = "La data non può essere nel passato")
+	private LocalDate dataFine;
+	@NotBlank(message = "Il nome non può essere null")
 	private String titolo;
+	@Min(value = 0, message = "Il prezzo non può essere minore di 0")
 	private int sconto;
 	
 	@ManyToOne
@@ -26,9 +33,9 @@ public class OffertaSpeciale {
 	private Pizza pizza;
 	
 	public OffertaSpeciale() {}
-	public OffertaSpeciale(LocalDate data_inizio, LocalDate data_fine, String titolo, int sconto, Pizza pizza) {
-		setDataFine(data_fine);
-		setDataInizio(data_inizio);
+	public OffertaSpeciale(LocalDate dataInizio, LocalDate dataFine, String titolo, int sconto, Pizza pizza) {
+		setDataInizio(dataInizio);
+		setDataFine(dataFine);
 		setTitolo(titolo);
 		setSconto(sconto);
 		setPizza(pizza);
@@ -42,16 +49,16 @@ public class OffertaSpeciale {
 		this.id = id;
 	}
 	public LocalDate getDataInizio() {
-		return data_inizio;
+		return dataInizio;
 	}
-	public void setDataInizio(LocalDate data_inizio) {
-		this.data_inizio = data_inizio;
+	public void setDataInizio(LocalDate dataInizio) {
+		this.dataInizio = dataInizio;
 	}
 	public LocalDate getDataFine() {
-		return data_fine;
+		return dataFine;
 	}
-	public void setDataFine(LocalDate data_fine) {
-		this.data_fine = data_fine;
+	public void setDataFine(LocalDate dataFine) {
+		this.dataFine = dataFine;
 	}
 	public String getTitolo() {
 		return titolo;
@@ -71,10 +78,14 @@ public class OffertaSpeciale {
 	public void setPizza(Pizza pizza) {
 		this.pizza = pizza;
 	}
+	public String getPrezzoScontato() {
+		double prezzo_scontato =  getPizza().getPrezzo() - ((getPizza().getPrezzo() * getSconto()) / 100f);
+		return String.format("%,.2f", prezzo_scontato) + "€";
+	}
 	
 	@Override
 	public String toString() {
 			
-		return "[" + getId() + "] " + getTitolo() + " - " + getSconto() + "%" + getDataInizio() + getDataFine();
+		return "[" + getId() + "] " + getTitolo() + " - " + getSconto() + "% " + getDataInizio() + " " + getDataFine();
 	}
 }

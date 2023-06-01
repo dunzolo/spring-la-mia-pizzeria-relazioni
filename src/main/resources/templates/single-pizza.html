@@ -9,21 +9,23 @@
 <div class="container mt-5">
 		<div class="row border border-dark pt-5 pb-5">
 			<h1 class="text-center">Dettaglio</h1>
+			
 			<div class="col d-flex justify-content-center">
 				<div class="card" style="width: 18rem;">
 				  <img th:src="*{foto}" class="card-img-top">
 				  <div class="card-body text-center">
 				    <h5 class="card-title">[[ *{nome} ]]</h5>
 				    <p class="card-text">[[ *{descrizione} ]]</p>
-				    <p class="card-text">[[ *{prezzo} ]]</p>
+				    <p class="card-text">[[ *{getFormatPrezzo} ]]</p>
 				  </div>
 				  <div class="card-body text-center">
 				    <h2 class="card-title">Offerte</h2>
 				    <div th:each="offerta : ${offerte_list}" th:object="${offerta}">
 					    <p class="card-text">[[ *{titolo} ]] - [[ *{sconto} ]]%</p>
-<!-- 					    <p class="card-text">[[ *{data_inizio} ]]</p> -->
+					    <p class="card-text"><strong>Prezzo scontato: </strong>[[ *{getPrezzoScontato} ]]</p>
 				    </div>
-				    <a class="btn btn-primary mt-3" th:href="@{/offerta/create}">Aggiungi nuova offerta</a>
+				    <a class="btn btn-secondary" href="/">Torna alla home</a>
+				    <h5 th:if="${offerte_list.isEmpty()}">Non sono presenti offerte</h5>
 				  </div>
 				</div>
 			</div>

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.lessons.java.pojo.OffertaSpeciale;
+import org.lessons.java.pojo.Pizza;
 import org.lessons.java.repo.OffertaSpecialeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,5 +26,9 @@ public class OffertaSpecialeService {
 	public OffertaSpeciale save(OffertaSpeciale offertaSpeciale) {
 		
 		return offertaSpecialeRepo.save(offertaSpeciale);
+	}
+	public void delete(OffertaSpeciale offerta) {
+		
+		offertaSpecialeRepo.delete(offerta);
 	}
 }

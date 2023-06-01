@@ -74,7 +74,9 @@ public class Pizza {
 	public void getOffertaSpeciale(List<OffertaSpeciale> offerta_speciale) {
 		this.offerta_speciale = offerta_speciale;
 	}
-	
+	public String getFormatPrezzo() {
+		return prezzo + "€";
+	}
 	@Override
 	public String toString() {
 		

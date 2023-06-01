@@ -14,23 +14,53 @@
 				  <div class="mb-3">
 				    <label class="form-label">Titolo</label>
 				    <input type="text" class="form-control" name="titolo" th:value="*{titolo}">
-				    
+				    <label 
+				    	style="color: red" 
+				    	class="form-label"
+				    	th:if="${errors != null && errors.hasFieldErrors('titolo')}">
+				    	[[ ${errors.getFieldError('titolo').defaultMessage} ]]
+			    	</label>
 				  </div>
-<!-- 				  <div class="mb-3"> -->
-<!-- 				    <label class="form-label">Data inizio</label> -->
-<!-- 				    <input type="date" class="form-control" name="data_inizio" th:value="*{data_inizio}"> -->
-				    
-<!-- 				  </div> -->
-<!-- 				  <div class="mb-3"> -->
-<!-- 				    <label class="form-label">Data fine</label> -->
-<!-- 				    <input type="date" class="form-control" name="data_fine" th:value="*{data_fine}"> -->
-				    
-<!-- 				  </div> -->
+				  <div class="mb-3">
+				    <label class="form-label">Data inizio</label>
+				    <input type="date" class="form-control" name="dataInizio" th:value="*{dataInizio}">
+				    <label 
+				    	style="color: red" 
+				    	class="form-label"
+				    	th:if="${errors != null && errors.hasFieldErrors('dataInizio')}">
+				    	[[ ${errors.getFieldError('dataInizio').defaultMessage} ]]
+			    	</label>
+				  </div>
+				  <div class="mb-3">
+				    <label class="form-label">Data fine</label>
+				    <input type="date" class="form-control" name="dataFine" th:value="*{dataFine}">
+				    <label 
+				    	style="color: red" 
+				    	class="form-label"
+				    	th:if="${errors != null && errors.hasFieldErrors('dataFine')}">
+				    	[[ ${errors.getFieldError('dataFine').defaultMessage} ]]
+			    	</label>
+				  </div>
 				  <div class="mb-3">
 				    <label class="form-label">Sconto</label>
 				    <input type="number" class="form-control" name="sconto" th:value="*{sconto}">
+				    <label 
+				    	style="color: red" 
+				    	class="form-label"
+				    	th:if="${errors != null && errors.hasFieldErrors('sconto')}">
+				    	[[ ${errors.getFieldError('sconto').defaultMessage} ]]
+			    	</label>
+				  </div>
+				  <div class="mb-3">
+				    <label class="form-label">Pizza</label>
+				    <select class="form-select" name="pizza">
+				    	<option th:each="pizza : ${pizza_list}" th:object="${pizza}" th:value="*{id}">
+				    		[[ *{nome} ]]
+				    	</option>
+				    </select>
 				    
 				  </div>
+				  <a class="btn btn-secondary" th:href="@{/offerte}">Torna alle offerte</a>
 				  <button type="submit" class="btn btn-primary">Aggiungi</button>
 				</form>
 			</div>
