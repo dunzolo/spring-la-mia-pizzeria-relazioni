@@ -2,8 +2,10 @@ package org.lessons.java;
 
 import java.time.LocalDate;
 
+import org.lessons.java.pojo.Ingrediente;
 import org.lessons.java.pojo.OffertaSpeciale;
 import org.lessons.java.pojo.Pizza;
+import org.lessons.java.serv.IngredienteService;
 import org.lessons.java.serv.OffertaSpecialeService;
 import org.lessons.java.serv.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,9 @@ public class CrudPizzeria1Application implements CommandLineRunner {
 	
 	@Autowired
 	private OffertaSpecialeService offertaSpecialeService;
+	
+	@Autowired
+	private IngredienteService ingredienteService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CrudPizzeria1Application.class, args);
@@ -26,6 +31,14 @@ public class CrudPizzeria1Application implements CommandLineRunner {
 	
 	@Override
 	public void run(String... args) throws Exception {
+		Ingrediente i1 = new Ingrediente("ing1", "ingrediente numero 1");
+		Ingrediente i2 = new Ingrediente("ing2", "ingrediente numero 2");
+		Ingrediente i3 = new Ingrediente("ing3", "ingrediente numero 3");
+		
+		ingredienteService.saveIngrediente(i1);
+		ingredienteService.saveIngrediente(i2);
+		ingredienteService.saveIngrediente(i3);
+		
 		Pizza p1 = new Pizza("Margherita", 
 				"Pizza Margherita", 
 				"https://primochef.it/wp-content/uploads/2019/08/SH_pizza_fatta_in_casa-1200x800.jpg.webp",
@@ -48,9 +61,6 @@ public class CrudPizzeria1Application implements CommandLineRunner {
 		OffertaSpeciale s1 = new OffertaSpeciale(LocalDate.now(), LocalDate.parse("2023-06-10"), "sconto1", 10, p1);
 		OffertaSpeciale s2 = new OffertaSpeciale(LocalDate.now(), LocalDate.parse("2023-06-10"), "sconto2", 20, p2);
 		OffertaSpeciale s3 = new OffertaSpeciale(LocalDate.now(), LocalDate.parse("2023-06-10"), "sconto3", 30, p3);
-		
-		System.out.println(s1);
-		
 		
 		offertaSpecialeService.save(s1);
 		offertaSpecialeService.save(s2);

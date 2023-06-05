@@ -3,13 +3,14 @@ package org.lessons.java.contr;
 import java.util.List;
 import java.util.Optional;
 
+import org.lessons.java.pojo.Ingrediente;
 import org.lessons.java.pojo.Pizza;
+import org.lessons.java.serv.IngredienteService;
 import org.lessons.java.serv.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,9 @@ import jakarta.validation.Valid;
 public class PizzaController {
 	@Autowired
 	private PizzaService pizzaService;
+	
+	@Autowired
+	private IngredienteService ingredienteService;
 	
 	@GetMapping("/")
 	public String getHome(Model model) {
@@ -53,6 +57,9 @@ public class PizzaController {
 		Optional<Pizza> optPizzaId = pizzaService.findByIdWithSpecialOffer(id);
 		Pizza special_offer_pizza = optPizzaId.get();
 		
+		List<Ingrediente> ingredienti = ingredienteService.findAllIngredienti();
+		model.addAttribute("ingredienti", ingredienti);
+		
 		model.addAttribute("pizza", pizza);
 		model.addAttribute("offerte_list", special_offer_pizza.getOffertaSpeciale());
 		
@@ -61,6 +68,9 @@ public class PizzaController {
 	
 	@GetMapping("/pizza/create")
 	public String createPizza(Model model) {
+		
+		List<Ingrediente> ingredienti = ingredienteService.findAllIngredienti();
+		model.addAttribute("ingredienti", ingredienti);
 		
 		model.addAttribute("pizza", new Pizza());
 		
@@ -114,6 +124,10 @@ public class PizzaController {
 		
 		Optional<Pizza> pizzaOpt = pizzaService.findPizzaById(id);
 		Pizza pizza = pizzaOpt.get();
+		
+		List<Ingrediente> ingredienti = ingredienteService.findAllIngredienti();
+		model.addAttribute("ingredienti", ingredienti);
+		
 		model.addAttribute("pizza", pizza);
 		
 		return "edit-pizza";

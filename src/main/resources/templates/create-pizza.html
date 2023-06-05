@@ -51,6 +51,13 @@
 				    	[[ ${errors.getFieldError('prezzo').defaultMessage} ]]
 			    	</label>
 				  </div>
+  				  <div class="mb-3">
+				    <label class="form-label">Ingredienti</label>
+				    <div th:each="ingrediente : ${ingredienti}" th:object="${ingrediente}">
+					    <input th:id="${'ingrediente-' + ingrediente.id}" th:value="*{id}" type="checkbox" name="ingredienti">
+					    <label th:for="${'ingrediente-' + ingrediente.id}">[[ *{nome} ]]</label>
+				    </div>
+				  </div>
 				  <a class="btn btn-secondary me-3" href="/">Torna alla home</a>
 				  <button type="submit" class="btn btn-primary">Aggiungi</button>
 				</form>

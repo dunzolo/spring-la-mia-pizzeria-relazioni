@@ -12,7 +12,8 @@
 			<h1 class="text-center">Le mie pizze</h1>
 			<div class="col d-flex justify-content-center my-3">
 				<a class="btn btn-primary me-3" th:href="@{/pizza/create}">Aggiungi nuova pizza</a>
-				<a class="btn btn-secondary" th:href="@{/offerte}">Vai a offerte</a>
+				<a class="btn btn-secondary me-3" th:href="@{/offerte}">Vai a offerte</a>
+				<a class="btn btn-secondary" th:href="@{/ingredienti}">Vai ad ingredienti</a>
 			</div>
 			<form class="text-center" th:action="@{/pizza/nome}" method="POST">
 				<label>Nome</label>

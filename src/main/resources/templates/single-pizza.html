@@ -17,6 +17,9 @@
 				    <h5 class="card-title">[[ *{nome} ]]</h5>
 				    <p class="card-text">[[ *{descrizione} ]]</p>
 				    <p class="card-text">[[ *{getFormatPrezzo} ]]</p>
+				    <p class="card-text" th:each="ingrediente : *{ingredienti}" th:object="${ingrediente}">
+				    	[[ *{nome} ]]
+				    </p>
 				  </div>
 				  <div class="card-body text-center">
 				    <h2 class="card-title">Offerte</h2>
